@@ -1,0 +1,101 @@
+// Copyright (C) 2017 The LineageOS Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_shared {
+    name: "libshim_camera_system",
+
+    srcs: ["camera_shim.cpp"],
+
+    shared_libs: [
+        "libgui",
+        "libui",
+    ],
+
+    include_dirs: ["frameworks/native/include"],
+
+    compile_multilib: "32",
+    system_ext_specific: true,
+}
+
+cc_library_shared {
+    name: "libshim_bwfocus",
+
+    srcs: ["bwfocus_shim.c"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+
+    compile_multilib: "32",
+    vendor: true,
+}
+
+cc_library_shared {
+    name: "libcamera_metadata_helper",
+    proprietary: true,
+    defaults: ["hidl_defaults"],
+    srcs: [
+        "CameraMetadata.cpp",
+        "CameraParameters.cpp",
+    ],
+    cflags: [
+        "-Werror",
+        "-Wextra",
+        "-Wall",
+    ],
+    shared_libs: [
+        "liblog",
+        "libutils",
+        "libhardware",
+        "libcamera_metadata",
+    ],
+    include_dirs: ["system/media/private/camera/include"],
+}
+
+// libandroid
+cc_library_shared {
+    name: "libshims_android",
+    proprietary: true,
+    defaults: ["hidl_defaults"],
+    srcs: [
+        "libshims_android.cpp",
+    ],
+    cflags: [
+        "-Werror",
+        "-Wextra",
+        "-Wall",
+    ],
+    shared_libs: [
+        "libutils",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libbinder-v32",
+    vendor: true,
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: ["vndk/v32/arm/libbinder-v32.so"],
+        },
+        android_arm64: {
+            srcs: ["vndk/v32/arm64/libbinder-v32.so"],
+        },
+    },
+    compile_multilib: "both",
+    check_elf_files: false,
+}

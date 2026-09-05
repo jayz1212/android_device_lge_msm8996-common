@@ -1,0 +1,23 @@
+# Camera
+persist.data.front.             u:object_r:camera_prop:s0
+persist.data.rear.              u:object_r:camera_prop:s0
+persist.vendor.lge.data.front.  u:object_r:vendor_camera_prop:s0
+persist.vendor.lge.data.rear.   u:object_r:vendor_camera_prop:s0
+sys.ois.                        u:object_r:camera_prop:s0
+sys.camera.                     u:object_r:camera_prop:s0
+persist.camera.                 u:object_r:camera_prop:s0
+
+# Keymaster/Gatekeeper
+sys.listeners.registered   u:object_r:vendor_tee_listener_prop:s0
+
+# Perfd
+sys.post_boot.             u:object_r:post_boot_prop:s0
+
+# Radio
+oem.device.imeicache       u:object_r:diag_prop:s0
+
+persist.net.doxlat         u:object_r:vendor_xlat_prop:s0
+
+# Thermal
+sys.thermal.para               u:object_r:vendor_thermal_prop:s0
+persist.sys.thermald_miti_off  u:object_r:vendor_thermal_prop:s0
